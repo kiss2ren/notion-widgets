@@ -1,1 +1,168 @@
+body {
+  display: grid;
+  height: 75dvh;
+  padding: 0;
+  margin: 0;
+  place-content: center;
+  color-scheme: light dark;
+  background: #040406;
+}
 
+@property --rotation {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.gemini {
+  --border-size: 4px;
+  --gradient: conic-gradient(from var(--rotation) at 52% 49% in oklab, oklch(0.63 0.2 251.22) 27%, oklch(0.67 0.21 25.81) 33%, oklch(0.9 0.19 93.93) 41%, oklch(0.79 0.25 150.49) 49%, oklch(0.63 0.2 251.22) 65%, oklch(0.72 0.21 150.89) 93%, oklch(0.63 0.2 251.22));
+  animation: rotate 5s infinite linear;
+  border-radius: 4rem;
+  background: none;
+  position: relative;
+  width: 375px;
+  max-width: 90vw; 
+  padding: 0;
+  border: 4px solid lightgray;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    animation: rotate 5s infinite linear;
+    filter: blur(15px);
+  }
+  
+  .inner {
+    background: light-dark(white, #1a1c1e);
+    color: light-dark(#222, hsl(210, 8%, 66%));
+    display: inline;
+    padding: 1rem 0.5rem;
+    position: relative;
+    z-index: 2;
+    border-radius: inherit;
+    display: flex;
+    grid-template-columns: 1fr 250px 1fr;
+    align-items: center;
+    gap: 1rem;
+    font-family: system-ui;
+  }
+
+  .border {
+    position: absolute;
+    inset: calc(var(--border-size) * -1);
+    mask: linear-gradient(white);
+    border-radius: inherit;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient);
+      top: 50%;
+      left: 50%;
+      translate: -50% -50%;
+      z-index: -1;
+      filter: blur(5px);
+    }
+  }
+
+.text {
+    display: inline;
+    flex: 1;
+    min-width: 0;
+    color: light-dark(#222, hsl(210, 8%, 70%));
+    font-size: 1rem;
+    font-family: system-ui;
+    font-weight: 300;
+ }
+  
+.typing {
+  display: inline;
+}
+  
+/* Default: cursor visible, not blinking */
+.typed-cursor {
+  display: inline-block;
+  width: 1px;
+  height: 1.25em;
+  background-color: currentColor;
+  margin-left: 2.25px;
+  vertical-align: middle;
+  position: relative;
+  top: -0.90px;
+  animation: none;      /* no blinking while typing */
+}
+
+/* Add blinking when idle */
+.typed-cursor.blink {
+  animation: blink 5s step-start infinite alternate;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+.grad{
+  background-image: linear-gradient(
+    90deg,
+    #EA4335,
+    #FABB05,
+    #34A853,
+    #4285F4,
+    #C51162
+  );
+  background-clip: text;
+  color: transparent;
+  background-size: 160% auto;
+ }
+  
+.highlight{
+  color: blue;
+}
+  
+.add-button,
+.mic-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+  button,
+  input {
+    color: light-dark(#222, hsl(210, 8%, 66%));
+    background: none;
+    border: none;
+  }
+  
+  input {
+    font-size: 1rem;
+    font-family: system-ui;
+    font-weight: 300;
+    
+    &:focus {
+      outline: none;
+    }
+    
+    &:not(:placeholder-shown) {
+      color: light-dark(black, white);
+    }
+  }
+}
+
+@keyframes rotate {
+  to {
+    --rotation: 360deg;
+  }
+}
