@@ -6,5 +6,5 @@ var typing=new Typed(".typing", {
     backDelay: 1000,
     smartBackspace: true,
     loop: true,
-    cursorChar: '', // <--- Prevents Typed.js from inserting '|'
+    cursorChar: '',
 });
